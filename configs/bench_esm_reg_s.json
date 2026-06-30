@@ -1,0 +1,53 @@
+{
+  "data": {
+    "label_cutoff": 5.0,
+    "atom_edge_radius": 4.8,
+    "surface_edge_radius": 6.0,
+    "cross_edge_radius": 6.0,
+    "max_atom_neighbors": 32,
+    "max_surface_neighbors": 32,
+    "max_cross_neighbors": 48,
+    "probe_radius": 1.4,
+    "n_surface_dirs": 16,
+    "max_surface_points": 2048,
+    "use_surface_normals_as_features": false,
+    "center_coordinates": true,
+    "random_rotation": true,
+    "coordinate_jitter_std": 0.02,
+    "residue_edge_radius": 12.0,
+    "max_residue_neighbors": 32,
+    "surface_feature_set": "basic",
+    "cache_dir": "cache/bench_esm"
+  },
+  "model": {
+    "atom_dim": 64,
+    "surface_dim": 64,
+    "fusion_dim": 64,
+    "n_atom_layers": 3,
+    "n_surface_layers": 2,
+    "n_fusion_layers": 2,
+    "n_attention_heads": 4,
+    "dropout": 0.3,
+    "use_coordinate_updates": true,
+    "residue_pooling": "attention",
+    "use_residue_context": true,
+    "n_residue_layers": 1,
+    "use_plm_features": true,
+    "plm_dropout": 0.55
+  },
+  "train": {
+    "seed": 42,
+    "batch_size": 1,
+    "epochs": 25,
+    "lr": 0.00015,
+    "weight_decay": 0.12,
+    "warmup_epochs": 2,
+    "grad_clip": 1.0,
+    "positive_weight": null,
+    "dice_weight": 0.2,
+    "amp": true,
+    "num_workers": 4,
+    "eval_every": 1,
+    "checkpoint_metric": "pr_auc"
+  }
+}

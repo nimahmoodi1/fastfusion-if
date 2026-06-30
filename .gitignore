@@ -1,0 +1,58 @@
+# =====================================================================
+# FastFusion-IF .gitignore
+# Goal: commit ONLY source code + small reproducibility files.
+# Everything large or regenerable (caches, checkpoints, eval dumps,
+# datasets, ESM weights) stays OUT of the repository.
+# =====================================================================
+
+# ---- generated training / evaluation artifacts (large) ----
+runs/
+eval/
+cache/
+final_results/
+final_results_backup/
+crash_logs/
+code_backups/
+
+# ---- raw datasets & downloads (users fetch these themselves; see README) ----
+data/
+AGAT-PPIS/
+*.tar.gz
+*.tar
+*.zip
+
+# ---- model weights / checkpoints ----
+*.pt
+*.pth
+*.ckpt
+
+# ---- mmseqs working dirs and baked feature arrays (regenerable) ----
+*.work/
+manifests/**/_plm/
+*.npz
+*.npy
+
+# ---- python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+
+# ---- OS / editor ----
+.DS_Store
+*.swp
+*~
+
+# ---------------------------------------------------------------------
+# NOTE: the manifests/*.csv files (train/val/test split membership) and
+# the small *.report.json / *.cluster_report.json files ARE committed on
+# purpose — they define the exact splits used in the paper. If your CSVs
+# contain machine-specific absolute paths you want to keep private,
+# uncomment the next line and regenerate them with the scripts instead:
+# manifests/*.csv

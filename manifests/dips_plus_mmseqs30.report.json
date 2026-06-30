@@ -1,0 +1,12 @@
+{
+  "split_counts": {
+    "train": 33690,
+    "val": 4211,
+    "test": 4211
+  },
+  "n_rows": 42112,
+  "n_cluster_leaks": 0,
+  "n_chain_cluster_leaks": 0,
+  "cluster_leaks": {},
+  "chain_cluster_leaks": {}
+}
