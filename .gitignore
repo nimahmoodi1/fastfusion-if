@@ -71,3 +71,4 @@ env/
 # basenames before making the repository public. To exclude them
 # instead, uncomment:
 # manifests/*.csv
+/figures/
