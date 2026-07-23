@@ -1,6 +1,6 @@
 # FastFusion-IF — Final Results (paper-ready)
 
-**Model.** FastFusion-IF (~2.86M params): atom EGNN + mesh-free solvent-excluded
+**Model.** FastFusion-IF (~1.39M params): atom EGNN + mesh-free solvent-excluded
 **surface point-cloud encoder** + cross-modal fusion + attention residue pooling +
 residue-context graph transformer + ESM-2 injection + decoder. Residue-level PPI
 interface prediction from single-chain, partner-blind input.

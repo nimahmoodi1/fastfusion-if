@@ -3,28 +3,40 @@
 # Goal: commit ONLY source code + small reproducibility files.
 # Everything large or regenerable (caches, checkpoints, eval dumps,
 # datasets, ESM weights) stays OUT of the repository.
+#
+# NOTE ON THE LEADING SLASHES
+# A pattern like `data/` matches a directory named `data` at ANY depth,
+# which silently swallowed `fastfusion_if/data/` (the entire data-loading
+# subpackage) in an earlier version of this file. A leading slash anchors
+# the pattern to the repository root, which is what we actually want for
+# every entry below. Do not remove the slashes.
 # =====================================================================
 
 # ---- generated training / evaluation artifacts (large) ----
-runs/
-eval/
-cache/
-final_results/
-final_results_backup/
-crash_logs/
-code_backups/
+/runs/
+/eval/
+/cache/
+/final_results/
+/final_results_backup/
+/crash_logs/
+/code_backups/
 
 # ---- raw datasets & downloads (users fetch these themselves; see README) ----
-data/
-AGAT-PPIS/
+/data/
+/AGAT-PPIS/
 *.tar.gz
 *.tar
 *.zip
 
 # ---- model weights / checkpoints ----
+# Training outputs are excluded, but the small RELEASED checkpoints in
+# checkpoints/ are committed on purpose (~5 MB each) so users can run
+# inference straight from a clone. The negation below must come AFTER the
+# *.pt rule to take effect.
 *.pt
 *.pth
 *.ckpt
+!checkpoints/*.pt
 
 # ---- mmseqs working dirs and baked feature arrays (regenerable) ----
 *.work/
@@ -37,8 +49,8 @@ __pycache__/
 *.py[cod]
 *.egg-info/
 .eggs/
-build/
-dist/
+/build/
+/dist/
 .venv/
 venv/
 env/
@@ -52,7 +64,10 @@ env/
 # ---------------------------------------------------------------------
 # NOTE: the manifests/*.csv files (train/val/test split membership) and
 # the small *.report.json / *.cluster_report.json files ARE committed on
-# purpose — they define the exact splits used in the paper. If your CSVs
-# contain machine-specific absolute paths you want to keep private,
-# uncomment the next line and regenerate them with the scripts instead:
+# purpose — they define the exact splits used in the paper. They
+# currently contain absolute paths of the form
+# /home/<user>/Nima/AGAT-PPIS/Dataset/pdb/xxxx.pdb, which leaks your
+# username and directory layout. Consider regenerating them with
+# basenames before making the repository public. To exclude them
+# instead, uncomment:
 # manifests/*.csv
