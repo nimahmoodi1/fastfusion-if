@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use FastFusion-IF, please cite this software."
+title: "FastFusion-IF"
+type: software
+version: "1.0.0"
+
+authors:
+  - given-names: "Nima"
+    family-names: "Mahmoudi"
+    # affiliation: "University of Science and Technology of Mazandaran"
+    # orcid: "https://orcid.org/0000-0000-0000-0000"
+
+abstract: >-
+  FastFusion-IF is a partner-blind protein-protein interface prediction
+  method that predicts residue-level interface probabilities from a single
+  protein chain by combining atomic geometry, molecular-surface information,
+  and residue-level evolutionary and structural profiles.
+
+keywords:
+  - protein-protein interface prediction
+  - protein structure
+  - geometric deep learning
+  - molecular surface
+  - deep learning
+
+license: "MIT"
+repository-code: "https://github.com/nimahmoodi1/fastfusion-if"
