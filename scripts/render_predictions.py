@@ -350,13 +350,17 @@ def main() -> None:
     if not written:
         sys.exit("\nNothing was written.")
 
+    # Collect EVERY .pml in the directory, not just this batch, so calling the
+    # script twice into the same --out-dir (e.g. a bound/unbound pair from two
+    # different prediction files) does not silently drop the earlier renders.
     master = out / "render_all.pml"
-    master.write_text("\n".join(f"@{w}\ndelete all\n" for w in written))
+    all_pml = sorted(p.name for p in out.glob("*.pml") if p.name != "render_all.pml")
+    master.write_text("\n".join(f"@{w}\ndelete all\n" for w in all_pml))
 
     if write_colorbar(out / "colorbar.png"):
         print(f"\nwrote colorbar.png / colorbar.pdf (matches the blue_white_red scale)")
 
-    print(f"\nwrote {len(written)} PyMOL scripts to {out}/")
+    print(f"\nwrote {len(written)} PyMOL scripts ({len(all_pml)} total in {out}/)")
     print("\nRender them all:")
     print(f"  cd {out} && pymol -cq render_all.pml")
     print("Or open one interactively to choose the viewpoint:")
