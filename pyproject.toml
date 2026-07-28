@@ -1,6 +1,6 @@
 [project]
 name = "fastfusion-if"
-version = "0.1.0"
+version = "1.0.0"
 description = "Surface-atom cross-modal fusion for protein interface prediction"
 requires-python = ">=3.10"
 dependencies = [
