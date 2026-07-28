@@ -7,7 +7,7 @@ version: "1.0.0"
 authors:
   - given-names: "Nima"
     family-names: "Mahmoudi"
-    # affiliation: "University of Science and Technology of Mazandaran"
+    affiliation: "University of Science and Technology of Mazandaran"
     # orcid: "https://orcid.org/0000-0000-0000-0000"
 
 abstract: >-
