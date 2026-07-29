@@ -1,5 +1,7 @@
 # FastFusion-IF
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21652863.svg)](https://doi.org/10.5281/zenodo.21652863)
+
 **Partner-blind protein–protein interface prediction from molecular surface and atomic geometry.**
 
 FastFusion-IF predicts, for every residue of a *single* protein chain, the probability that it
@@ -21,36 +23,27 @@ module consumes only interatomic distances.
 
 ## Headline results
 
-AGAT-PPIS benchmark, 3-seed ensemble, decision threshold tuned once on the validation split.
-Published baselines are from GTE-PPIS (*Briefings in Bioinformatics* 26(3), bbaf290, 2025), Table 3.
+AGAT-PPIS benchmark, three-seed ensemble. **Protocol B** (leakage-free: the
+validation split is held out from Train_335, so no test set informs model
+selection) is the primary protocol and matches the manuscript. Protocol A
+follows the convention used by published methods, in which Test_60 is the
+selection set; under it, Test_60 and its subset Btest_25 are not independent
+estimates.
 
-**Test_315-28 — bound, 287 chains**
-
-| Method | MCC | AUPRC |
+| Test set | Protocol B (AUPRC / MCC) | Protocol A (AUPRC / MCC) |
 |---|---|---|
-| GraphPPIS | 0.335 | 0.408 |
-| RGCNPPIS | 0.352 | 0.420 |
-| AGAT-PPIS | 0.442 | 0.525 |
-| **FastFusion-IF (ours)** | **0.456** | **0.544** |
-| GTE-PPIS | 0.511 | 0.598 |
+| Test_60 | 0.564 / 0.450 | 0.578 / 0.466 * |
+| Test_315-28 | 0.528 / 0.442 | 0.544 / 0.456 |
+| Btest_25 | 0.523 / 0.424 | 0.529 / 0.440 * |
+| UBtest_25 | **0.367 / 0.320** | 0.404 / 0.339 |
 
-**UBtest_25 — unbound, 25 chains**
+\* selection-set data under Protocol A; not an independent estimate.
 
-| Method | MCC | AUPRC |
-|---|---|---|
-| GraphPPIS | 0.298 | 0.330 |
-| RGCNPPIS | 0.296 | 0.354 |
-| AGAT-PPIS | 0.301 | 0.325 |
-| GTE-PPIS | 0.320 | 0.343 |
-| **FastFusion-IF (ours)** | **0.339** | **0.404** |
-
-FastFusion-IF beats GraphPPIS, RGCNPPIS and AGAT-PPIS on the bound set using **the same input
-features**, and is the best of all evaluated methods — including the current state of the art —
-on the **unbound** set, where conformation-invariant sequence features transfer worst.
-
-The residue counts of our evaluated sets match the published benchmark statistics exactly
-(Test_315-28: 60,376 residues / 8,566 positive; UBtest_25: 5,917 / 711), confirming an
-identical-data comparison. Full per-metric tables: [`RESULTS.md`](RESULTS.md).
+Under Protocol B, FastFusion-IF attains the **best AUPRC of all evaluated
+methods on the unbound test set** (0.367 versus 0.354 for the previous best,
+RGCNPPIS) and is competitive with AGAT-PPIS on the bound benchmarks, at 1.39M
+parameters. Reproduce both protocols with `scripts/prepare_benchmark.py
+--protocol paper` and `--protocol holdout`; see RESULTS.md for full metrics.
 
 ---
 
@@ -497,6 +490,12 @@ follow on publication), and the benchmark and dataset sources as appropriate:
 - **GTE-PPIS** — Wang et al., *Briefings in Bioinformatics* 26(3), bbaf290, 2025. Source of the unified baseline numbers quoted above.
 - **DIPS-Plus** — Morehead et al., *Scientific Data* 10:509, 2023.
 - **ESM-2** — Lin et al., *Science* 379:1123–1130, 2023.
+
+### Software citation
+
+Mahmoudi, N. (2026). FastFusion-IF (Version v1.0.0) [Computer software].
+Zenodo. https://doi.org/10.5281/zenodo.21652863
+
 
 ## License
 

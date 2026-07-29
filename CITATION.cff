@@ -3,6 +3,8 @@ message: "If you use FastFusion-IF, please cite this software."
 title: "FastFusion-IF"
 type: software
 version: "1.0.0"
+doi: "10.5281/zenodo.21652863"
+date-released: 2026-07-28
 
 authors:
   - given-names: "Nima"
