@@ -1,0 +1,38 @@
+# XAI configuration for FastFusion-IF.
+# Every value here affects reported numbers, so it is version-controlled and
+# copied into results/xai/report/run_metadata.json at run time.
+
+seed: 0
+device: auto            # auto | cpu | cuda
+
+# --- Integrated Gradients ---------------------------------------------------
+ig_steps: 64            # midpoint Riemann; 64 keeps the completeness residual
+                        # under ~1% of the logit range on benchmark proteins
+ig_target: logit        # logit | prob. Use logit: sigmoid saturates at the
+                        # confident predictions that most need explaining.
+ig_scope: total         # total | self.  "total" = influence on the summed logit,
+                        # global completeness. "self" bypasses residue_context and
+                        # gives exact per-residue completeness; use it for single-
+                        # residue case studies.
+                        # confident predictions that most need explaining.
+
+# --- decision threshold -----------------------------------------------------
+threshold: 0.63         # Protocol A ensemble threshold; use 0.59 for Protocol B
+
+# --- interventions ----------------------------------------------------------
+interventions:
+  - {modality: surface,         mode: zero}      # out-of-distribution, see docs
+  - {modality: evolutionary,    mode: zero}
+  - {modality: evolutionary,    mode: shuffle}   # preserves the marginal
+  - {modality: residue_context, mode: zero}
+
+# --- faithfulness -----------------------------------------------------------
+deletion_fractions: [0.0, 0.05, 0.1, 0.2, 0.3, 0.5, 0.7, 1.0]
+deletion_orders: [descending, random]            # gap between them is the signal
+n_random_repeats: 5
+
+# --- statistics -------------------------------------------------------------
+bootstrap_n: 10000
+alpha: 0.05
+multiple_comparison: holm
+statistical_unit: protein   # residues within a protein are not independent
