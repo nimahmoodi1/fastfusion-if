@@ -1,0 +1,9 @@
+# XAI extras. Deliberately no captum: Layer-IG here is ~40 lines against the
+# model's own injection points, and a dependency would add no capability.
+numpy>=1.24
+scipy>=1.10
+pandas>=2.0
+pyyaml>=6.0
+matplotlib>=3.7
+scikit-learn>=1.3
+pytest>=7.4
